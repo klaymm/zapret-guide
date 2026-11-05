@@ -1,51 +1,33 @@
-# Ссылки и примечания
+# Ссылки и источники
 
-[← Назад к оглавлению](../README.md)
+[Оглавление](../README.md)
 
-## Яндекс.Браузер и другие российские браузеры
+Подборка из [обсуждения #8673](https://github.com/Flowseal/zapret-discord-youtube/discussions/8673).
 
-С октября 2025 года российские браузеры (Яндекс.Браузер и подобные) принудительно подменяют DNS на собственные серверы (`77.88.8.8`) и блокируют любые сторонние DoH, то есть шифрованные DNS-запросы. Zapret при этом может работать идеально, но тест в таком браузере всегда покажет отрицательный результат. Для проверки используйте Firefox, Brave, Chrome или Edge.
+## Полезные ссылки
 
-Проблему обнаружили [@V3nilla](https://github.com/V3nilla) и [@Dronatar](https://github.com/Dronatar), подробности в [issue #6083](https://github.com/Flowseal/zapret-discord-youtube/issues/6083).
+### Инструменты и справка
 
-## Диагностика и анализ
+| Если нужно | Куда перейти |
+| --- | --- |
+| Найти старую папку zapret | Откройте Everything и введите `general.bat` или имя старой папки. Сверьте путь перед удалением. [Everything](https://www.voidtools.com/) |
+| Сравнить скорость или DNS | В WiFiman запустите тест до и после изменения. В DNSCheck посмотрите обнаруженный DNS-резолвер. [WiFiman](https://wifiman.com/) · [DNSCheck](https://dnscheck.tools/) |
+| Проверить признаки фильтрации | Откройте описание тестов и сравните с результатом `12. Run Tests` --> `2. DPI checkers`. [DPI checkers](https://github.com/hyperion-cs/dpi-checkers) |
+| Найти хосты, IP и порты | Начните с [запросов браузера](GAMES.md#как-найти-домен-у-которого-сбой). Для сетевого анализа откройте Wireshark и инструкцию по поиску доменов. Справочники IP и портов используйте для сверки того, что увидели у себя. [Wireshark](https://www.wireshark.org/) · [Поиск доменов в Wireshark](https://wiki.malw.link/network/get-domains) · [IPList](https://iplist.opencck.org/ru/) · [PingFast](https://pingfast.app/game-ports) |
+| Настроить безопасный DNS | Сверьте шаги под вашу систему или браузер. [Windows 11](https://support.microsoft.com/en-gb/windows/experience/connectivity-networking/essential-network-settings-and-tasks-in-windows) · [Яндекс Браузер](https://browser.yandex.ru/help/ru/security/dnscrypt) · [Chrome](https://support.google.com/chrome/answer/10468685) · [Firefox](https://support.mozilla.org/en-US/kb/dns-over-https) |
+| Проверить, нет ли сбоя самого сервиса | Откройте страницу статуса и посмотрите, отмечен ли сбой в нужном компоненте. [Статус Discord](https://discordstatus.com/) · [Статус GitHub](https://www.githubstatus.com/) |
+| Проверить файл по хэшу | Вставьте SHA-256 в `Search`. Сравните точный файл и названия детектов. [VirusTotal](https://www.virustotal.com/gui/home/search) · [Отчёты VirusTotal](https://docs.virustotal.com/docs/results-reports) |
+| Понять общий принцип работы обходов | Видео из исходной подборки объясняет, как работают GoodbyeDPI и zapret. За номерами меню и настройками 1.10.4 обращайтесь к быстрому старту выше. [Видео Ильи Рублёва](https://www.youtube.com/watch?v=fOQ6vE6mpaw) |
 
-| Инструмент | Описание |
-|---|---|
-| [wifiman.com](https://wifiman.com/) | Проверка скорости интернета |
-| [Global Latency Test](https://github.com/hyperion-cs/dpi-checkers) | Обнаружение метода блокировки TCP 16-20 в РФ |
-| [DNSCheck](https://dnscheck.tools/) | Проверка на утечку DNS, валидация |
-| [IPList](https://iplist.opencck.org/ru) | Популярные домены и IP (CIDR) |
-| [PingFast](https://pingfast.app/game-ports) | Порты и IP популярных игр |
-| [Wireshark](https://www.wireshark.org/) | Глубокий анализ трафика |
-| [Поиск доменов через Wireshark](https://wiki.malw.link/network/get-domains) | Инструкция по фильтрации доменов |
-| [IP-Tracker](https://www.ip-tracker.org/) | Трекер IP-адресов |
-| [Включение Secure DNS на Win 11](https://www.howtogeek.com/765940/how-to-enable-dns-over-https-on-windows-11/) | Гайд по DoH |
+### Обсуждения
 
-## Видео
-
-- [«Как же на самом деле работает zapret?»](https://youtu.be/fOQ6vE6mpaw?si=E1D0nKXU9beLj6TZ)
-
-## Обсуждения с решениями (GitHub Issues и Discussions)
-
-- **Discord:** [#252](https://github.com/Flowseal/zapret-discord-youtube/discussions/252), [#7873](https://github.com/Flowseal/zapret-discord-youtube/issues/7873), [#7899](https://github.com/Flowseal/zapret-discord-youtube/discussions/7899), [#12614](https://github.com/Flowseal/zapret-discord-youtube/issues/12614)
-- **Discord + AdGuard (5000ms пинг / RTC):** [#13149](https://github.com/Flowseal/zapret-discord-youtube/issues/13149)
-- **Discord: демонстрация экрана:** [#7921](https://github.com/Flowseal/zapret-discord-youtube/issues/7921), [#8511](https://github.com/Flowseal/zapret-discord-youtube/issues/8511), [#8773](https://github.com/Flowseal/zapret-discord-youtube/issues/8773), [#12495](https://github.com/Flowseal/zapret-discord-youtube/issues/12495)
-- **Apex, Valorant:** [#7699](https://github.com/Flowseal/zapret-discord-youtube/issues/7699), [#7472](https://github.com/Flowseal/zapret-discord-youtube/issues/7472), [#7633](https://github.com/Flowseal/zapret-discord-youtube/issues/7633), [#7360](https://github.com/Flowseal/zapret-discord-youtube/issues/7360), [#8235](https://github.com/Flowseal/zapret-discord-youtube/issues/8235)
-- **Ошибки батника / запуска:** [#7490](https://github.com/Flowseal/zapret-discord-youtube/issues/7490), [#7565](https://github.com/Flowseal/zapret-discord-youtube/issues/7565), [#522](https://github.com/Flowseal/zapret-discord-youtube/issues/522), [#7210](https://github.com/Flowseal/zapret-discord-youtube/issues/7210)
-- **Loaded не меняется на Any:** [#6888](https://github.com/Flowseal/zapret-discord-youtube/issues/6888)
-- **Telegram:** [#5820](https://github.com/Flowseal/zapret-discord-youtube/issues/5820)
-- **Radmin VPN / TAP-адаптеры:** [#4201](https://github.com/Flowseal/zapret-discord-youtube/issues/4201), [#1826](https://github.com/Flowseal/zapret-discord-youtube/issues/1826)
-- **Интернет пропадает после перезагрузки:** [#3797](https://github.com/Flowseal/zapret-discord-youtube/discussions/3797)
-- **Play Market, MS Store:** [IP Ranges List](https://github.com/lord-alfred/ipranges/tree/main/microsoft)
-- **Steam:** [#7328](https://github.com/Flowseal/zapret-discord-youtube/issues/7328)
-- **EAC (Dead by Daylight и др.):** [#7179](https://github.com/Flowseal/zapret-discord-youtube/issues/7179), [#7224](https://github.com/Flowseal/zapret-discord-youtube/issues/7224), [#6786](https://github.com/Flowseal/zapret-discord-youtube/issues/6786)
-- **Minecraft:** [#6453](https://github.com/Flowseal/zapret-discord-youtube/discussions/6453), [#5667](https://github.com/Flowseal/zapret-discord-youtube/discussions/5667)
+- **Большие ветки по двум основным сервисам.** Начинайте с новых ответов, где совпадают ваш провайдер, версия и симптом. [Обход YouTube #251](https://github.com/Flowseal/zapret-discord-youtube/discussions/251) · [Обход Discord #252](https://github.com/Flowseal/zapret-discord-youtube/discussions/252)
+- **Как исследуют сетевые проблемы.** В #3423 есть материалы по DNS и поиску доменов, IP и портов игры. В #3279 интересно посмотреть, как менялись стратегии и откуда вырос один из старых ALT. Совместимость пользовательских батников проверяйте отдельно. [Подборка #3423](https://github.com/Flowseal/zapret-discord-youtube/discussions/3423) · [История стратегий Dronatar #3279](https://github.com/Flowseal/zapret-discord-youtube/discussions/3279) · [DPI checkers](https://github.com/hyperion-cs/dpi-checkers)
+- **Minecraft.** В одной ветке обсуждают серверы Hypixel и Minemen, в другой - конкретно Essential и e4mc. У них разные симптомы и разные точки отказа. [Серверы Minecraft #6453](https://github.com/Flowseal/zapret-discord-youtube/discussions/6453) · [Essential и e4mc #5585](https://github.com/Flowseal/zapret-discord-youtube/discussions/5585)
+- **Roblox.** Для картинок и аватарок есть отдельная ветка. В комментариях видно, что IP из первого сообщения подошёл не всем. Отдельно есть большая ветка с доменами и экспериментами по клиенту. [Картинки и аватарки #16296](https://github.com/Flowseal/zapret-discord-youtube/discussions/16296) · [ROBLOX ZAPRET #6800](https://github.com/Flowseal/zapret-discord-youtube/discussions/6800)
+- **Роутеры.** Для установки на роутер ищите инструкции по конкретной модели и прошивке в документации оригинального zapret. Шаги с `service.bat` выше относятся к Windows. [Вопрос про Keenetic #18610](https://github.com/Flowseal/zapret-discord-youtube/discussions/18610) · [Оригинальный zapret](https://github.com/bol-van/zapret)
+- **Другие сервисы.** В ветках про TikTok и Imgur собраны пользовательские эксперименты с DNS и `hosts`. Читайте ответы после первого сообщения, поскольку старый IP может перестать отвечать. Если сервис сам ограничивает доступ по региону, добавление его домена в список zapret не меняет ваш внешний IP. [TikTok #18077](https://github.com/Flowseal/zapret-discord-youtube/discussions/18077) · [Imgur #18313](https://github.com/Flowseal/zapret-discord-youtube/discussions/18313) · [Пример с ChatGPT #18591](https://github.com/Flowseal/zapret-discord-youtube/issues/18591)
 
 ## Источники
 
-- Авторство оригинального инструмента: [bol-van/zapret](https://github.com/bol-van/zapret)
-- Windows-сборка, на которую опирается гайд: [Flowseal/zapret-discord-youtube](https://github.com/Flowseal/zapret-discord-youtube)
-- Обсуждение-первоисточник гайда: [Flowseal/zapret-discord-youtube, Discussion #8673](https://github.com/Flowseal/zapret-discord-youtube/discussions/8673)
-- Альтернативная сборка: [zapret-win-bundle](https://github.com/bol-van/zapret-win-bundle)
-- Ускорение Telegram Desktop: [tg-ws-proxy](https://github.com/Flowseal/tg-ws-proxy)
+Оригинальный инструмент разработал [bol-van](https://github.com/bol-van/zapret). Сборка под Windows и её релизы - [Flowseal/zapret-discord-youtube](https://github.com/Flowseal/zapret-discord-youtube). Альтернативная Windows-сборка автора оригинала - [zapret-win-bundle](https://github.com/bol-van/zapret-win-bundle).
