@@ -1,164 +1,45 @@
-# 🎮 ИГРЫ И СЕРВИСЫ
+# Игры, Steam и пользовательские списки
 
-[← Назад к оглавлению](../README.md)
+[Оглавление](../README.md)
 
-> 🔄 После любых изменений в списках: `service.bat` → **2 (Remove)** → **1 (Install)**
+Для Discord, YouTube, SoundCloud и других сервисов откройте [решение проблем](TROUBLESHOOTING.md).
 
-Все файлы списков находятся в `C:\zapret\lists\`.
+## Игры и Steam
 
----
+1. [Выключите zapret](SETUP.md#как-выключить-и-включить-zapret), зайдите в игру и проверьте именно проблемный шаг - вход, поиск матча или голос. Включите тот же BAT и повторите.
+2. Если сбой есть только с zapret, откройте `service.bat` --> `4. Game Filter` --> `1. Disable`. Нажмите Enter на паузе и введите `0` для возврата. Выбирайте `5. IPSet Filter` до состояния `none`, нажимая Enter после каждого переключения для возврата в меню. Режимы идут по кругу `loaded` --> `none` --> `any` --> `loaded`. При ручном запуске закройте и заново откройте тот же BAT. При автозапуске выберите тот же BAT через `1. Install Service`, чтобы служба получила новые параметры Game Filter. Повторите проблемный шаг.
+3. Если игра не соединяется и без zapret, можно отдельно сравнить режимы `loaded` и `4. Game Filter` --> `2. TCP and UDP`. Меняйте одну настройку за раз и применяйте её как в шаге 2. `any` имеет смысл проверять коротко: для части правил он расширяет обработку на любые IP. После теста верните записанный исходный режим.
+4. Чтобы обновить IPSet или восстановить `loaded`, если скрипт сообщает `no backup to restore`, откройте папку `lists` и скопируйте `ipset-all.txt` в безопасное место. Затем выберите `service.bat` --> `8. Update IPSet List`. Откройте файл снова и убедитесь, что список изменился и в меню показано `loaded`. Если скачивание выдало ошибку, верните копию. Если обновление прошло, добавьте обратно только свои строки и перезапустите стратегию. [Рекомендации Flowseal](https://github.com/Flowseal/zapret-discord-youtube/blob/1.10.4/README.md) · [Меню Game Filter](https://github.com/Flowseal/zapret-discord-youtube/blob/1.10.4/service.bat#L785-L829) · [IPSet](https://github.com/Flowseal/zapret-discord-youtube/blob/1.10.4/service.bat#L1043-L1139)
 
-## ЭТАП 4: НАСТРОЙКА СЕРВИСОВ И ИГР
-
-### 4.1 — Файл `list-general-user.txt`
-
-Добавьте сюда домены необходимых сервисов:
+| Случай | Что проверить |
+| --- | --- |
+| **Steam долго входит или игра запускается только без zapret** | Переключите `5. IPSet Filter` в `none` по шагу 2 и повторите вход. В #16728 это помогло с запуском игр. Если нужно оставить прежний режим IPSet, откройте `lists\list-exclude-user.txt` в Блокноте, добавьте одной строкой имя API-хоста Steam из ответа разработчика, сохраните файл и перезапустите стратегию. Участники подтвердили результат. [Ответ с точным хостом #16728](https://github.com/Flowseal/zapret-discord-youtube/issues/16728#issuecomment-5284826740) · [Подтверждение](https://github.com/Flowseal/zapret-discord-youtube/issues/16728#issuecomment-5285979190) · [IPSet none помог в #3835](https://github.com/Flowseal/zapret-discord-youtube/discussions/3835#discussioncomment-17531034) |
+| **Steam - медленные загрузки** | Откройте экран загрузок и запишите скорость на одной игре. Выключите zapret и сравните её на той же загрузке. Затем отдельно откройте Steam --> "Настройки" --> "Загрузки" --> "Регион загрузки", выберите соседний регион и повторите. Если просадка только с zapret, сравните с выключенными фильтрами по шагу 2. [#18498](https://github.com/Flowseal/zapret-discord-youtube/issues/18498) · [Справка Steam](https://help.steampowered.com/en/faqs/view/21F5-8D5D-0141-7A5E) |
+| **Steam - чёрная Мастерская или Сообщество** | Найдите страницу того же предмета Мастерской в браузере и откройте её с zapret и без него. Если сбой только в клиенте, сначала проверьте режимы из шага 2. Если нашли нужный домен в запросах браузера, поищите его через `Ctrl + F` в штатном `lists\list-exclude.txt`. Такое исключение имеет приоритет над добавлением в пользовательский список обхода. [Штатные исключения](https://github.com/Flowseal/zapret-discord-youtube/blob/1.10.4/lists/list-exclude.txt) · [Перепроверка #18508](https://github.com/Flowseal/zapret-discord-youtube/issues/18508#issuecomment-6546060519) |
+| **Dead by Daylight** | Если вход работает, а поиск матча нет, проверьте матч с `Game Filter: disabled` и `IPSet Filter: loaded` по шагам выше. В #18548 у одного игрока так работал штатный `SIMPLE FAKE`. Если на вашей сети результата нет, верните исходные фильтры. [#18548](https://github.com/Flowseal/zapret-discord-youtube/issues/18548) |
+| **FACEIT EU, Riot, Epic Games** | Если ошибку выдаёт античит, закройте игру и клиент, [выключите zapret](SETUP.md#как-выключить-и-включить-zapret) и запустите игру заново. Если ошибка связана с WinDivert, см. [вариант bol-van](TROUBLESHOOTING.md#игра-или-античит-реагирует-на-windivert). Для Epic `AS-202` отдельно проверьте вход в аккаунт Epic в браузере. Для FACEIT запишите, открывается ли клиент, и отдельно повторите подключение к матчу. Если сбой остаётся с выключенным zapret, приложите точный код и результат проверки в ветку сервиса. [FACEIT #18421](https://github.com/Flowseal/zapret-discord-youtube/discussions/18421) · [Riot #18358](https://github.com/Flowseal/zapret-discord-youtube/issues/18358) · [Epic #18599](https://github.com/Flowseal/zapret-discord-youtube/issues/18599) |
+| **Genshin Impact и ARC Raiders** | Проверьте по очереди вход в лаунчер и подключение к игре. Для ARC Raiders отдельно проверьте голос уже после входа в матч. Если ломается только матч, меняйте Game Filter и IPSet по одному по шагам 2 и 3. При сбое на входе проверяйте лаунчер и доступ к аккаунту отдельно от игрового соединения. |
+| **Roblox и Minecraft** | В Roblox сначала откройте каталог и карточку игры, затем нажмите запуск и запишите код, если сессия не открылась. Для картинок отдельно проверьте [запросы браузера](#как-найти-домен-у-которого-сбой). В Minecraft проверьте вход в лаунчер и подключение к конкретному серверу отдельно. [Roblox #16296](https://github.com/Flowseal/zapret-discord-youtube/discussions/16296) · [Серверы Minecraft #6453](https://github.com/Flowseal/zapret-discord-youtube/discussions/6453) · [Essential и e4mc #5585](https://github.com/Flowseal/zapret-discord-youtube/discussions/5585) |
+| **NVIDIA App или поиск драйверов** | Откройте официальный поиск драйверов в браузере, выберите модель карты и нажмите поиск. Если список не появляется, повторите с выключенным zapret, затем с `IPSet Filter: none` по шагу 2. Если сайт показывает драйвер, а NVIDIA App зависает, скачивание можно проверить через сайт. [Ход проверки #18612](https://github.com/Flowseal/zapret-discord-youtube/discussions/18612#discussioncomment-19410823) |
 
 <details>
-<summary>📄 <b>Показать содержимое list-general-user.txt</b></summary>
+<summary>Какие списки редактировать</summary>
 
-```text
-; Instagram
-static.cdninstagram.com
-instagram.feed.com
-cdninstagram.com
-instagram.com
-fbcdn.net
-fbsbx.com
+Файлы находятся в папке `lists`. Пользовательские файлы создаются при первом запуске. Вносите по одному домену или адресу на строку. Для доменов достаточно имени хоста без `https://` и пути. Запись родительского домена покрывает его поддомены.
 
-; Facebook
-facebook.com
-fbcdn.net
-fbsbx.com
-accountkit.com
-facebookauth.com
-facebook.net
-fb.com
-fb.me
+| Файл | Для чего |
+| --- | --- |
+| `list-general-user.txt` | Домены для обхода |
+| `list-exclude-user.txt` | Домены, которые нужно исключить в правилах с этим списком |
+| `ipset-all.txt` | IP-адреса или CIDR для режима `loaded` |
+| `ipset-exclude-user.txt` | IP-адреса или CIDR для исключений |
 
-; Twitter / X
-x.com
-api.x.com
-twitter.com
-api.tweetdeck.com
-abs.twimg.com
-pbs.twimg.com
-video.twimg.com
-t.co
-abs-0.twimg.com
-
-; Genshin Impact (Asia & Europe)
-asia.genshin.mihoyo.com
-hk4e-api.mihoyo.com
-api-takumi.mihoyo.com
-download.genshin.mihoyo.com
-genshin.hoyoverse.com
-hk4e-api-os.mihoyo.com
-hk4e-sdk-os.mihoyo.com
-log-upload-os.mihoyo.com
-dispatchosglobal.mihoyo.com
-osasiadispatch.mihoyo.com
-oseurodispatch.mihoyo.com
-webstatic-sea.mihoyo.com
-minor-api-os.hoyoverse.com
-sg-public-data-api.hoyoverse.com
-log-upload-os.hoyoverse.com
-sentry.eks.hoyoverse.com
-
-; Arc Raiders
-privacy.xboxlive.com
-api.epicgames.dev
-api-gateway.europe.es-pio.net
-client2pubsub.europe.es-pio.net
-es-pio.net
-es-cf.net
-
-; Speedtest
-speedtest.net
-
-; Modrinth
-modrinth.com
-
-; Rutracker
-rutracker.org
-static.rutracker.cc
-fastpic.org
-
-; SoundCloud
-soundcloud.cloud
-soundcloud.com
-sndcdn.com
-
-; Essential (Minecraft мод)
-essential.gg
-imagedelivery.net
-```
+Откройте файл правой кнопкой --> "Открыть с помощью" --> "Блокнот". Сделайте копию файла, вставьте нужное имя хоста на отдельную строку, нажмите `Ctrl + S`. Закройте и откройте файл снова, чтобы проверить сохранение. [Перезапустите zapret](SETUP.md#как-выключить-и-включить-zapret) и повторите тот же тест. Если результат ухудшился, удалите добавленную строку или верните копию, сохраните файл и снова перезапустите zapret. Большая подсеть общего CDN может затронуть другие игры и сайты. [Файлы списков в README](https://github.com/Flowseal/zapret-discord-youtube/blob/1.10.4/README.md)
 
 </details>
 
-### 4.2 — Фикс Nvidia App
+## Как найти домен, у которого сбой
 
-Если Nvidia App не загружается, добавьте в системный hosts (`C:\Windows\System32\drivers\etc\hosts`):
-
-```
-185.246.223.127 developer.nvidia.com
-```
-
----
-
-## ЭТАП 5: НАСТРОЙКА IPSET
-
-1. Откройте `C:\zapret\lists\ipset-all.txt`
-2. Убедитесь, что в настройках запрета установлено значение `Switch ipset: loaded`
-
-### Genshin Impact & Arc Raiders
-
-<details>
-<summary>📄 <b>Показать IP-адреса для ipset-all.txt</b></summary>
-
-```text
-; Genshin Impact (Asia & Europe)
-47.91.24.239
-116.251.83.218
-47.100.0.0/15
-47.102.0.0/15
-47.116.0.0/17
-43.132.28.160
-43.132.29.187
-43.132.31.114
-43.132.28.122
-43.132.29.164
-43.132.31.45
-
-; Arc Raiders
-34.4.16.0/20
-34.4.32.0/19
-34.4.64.0/19
-34.4.96.0/22
-34.4.128.0/18
-34.6.0.0/15
-34.8.0.0/13
-34.16.0.0/12
-34.32.0.0/11
-34.64.0.0/10
-34.128.0.0/10
-35.184.0.0/13
-35.192.0.0/14
-35.196.0.0/15
-35.198.0.0/16
-35.199.0.0/17
-35.199.128.0/18
-35.200.0.0/13
-35.208.0.0/12
-35.224.0.0/12
-35.240.0.0/13
-136.107.0.0/16
-136.108.0.0/14
-136.112.0.0/13
-```
-
-</details>
-
----
-
-[← Назад к оглавлению](../README.md) · [Далее: Решение проблем →](TROUBLESHOOTING.md)
+1. В Chrome, Firefox или Яндекс Браузере откройте страницу и нажмите `F12` --> "Сеть" (`Network`). Обновите страницу и повторите действие, которое ломается. Для аудио и видео сначала смотрите "Медиа", а если список пуст - "Все" и `Fetch/XHR`.
+2. Нажмите на запрос со статусом `(failed)`, ошибкой DNS или тайм-аутом --> "Заголовки" --> `Request URL`. Возьмите только имя хоста из адреса, без `https://`, пути и параметров. Сравните, что происходит с тем же запросом при выключенном zapret.
+3. Если запрос падает только с zapret, проверьте найденный хост в `lists\list-exclude-user.txt`. Если он падает и без zapret, а сайт частично работает, можно проверить его в `lists\list-general-user.txt`. Добавляйте по одному хосту и [перезапускайте стратегию](SETUP.md#как-выключить-и-включить-zapret). Если сервер возвращает `401`, `403` или `429`, сначала прочитайте сообщение на странице. Это могут быть проблемы со входом, доступом или лимитами.
