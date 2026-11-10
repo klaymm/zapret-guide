@@ -2,6 +2,19 @@
 
 Это пошаговый гайд по сборке Flowseal. **Проверено по релизу 1.10.4 на 5 ноября 2026.**
 
+<a name="yandex-browser"></a>
+
+> [!IMPORTANT]
+> **Яндекс Браузер и первый тест обхода.** Сначала откройте проблемную страницу в Firefox или Chrome с включённым DoH. Затем проверьте ту же страницу в Яндекс Браузере на той же сети. В #6083 V3nilla и Dronatar описали, как результаты проверки доступа и DNS различались между браузерами. Если результаты отличаются, сравните выбранных DNS-провайдеров. [Первичный отчёт #6083](https://github.com/Flowseal/zapret-discord-youtube/issues/6083) · [Обсуждение DNS #17186](https://github.com/Flowseal/zapret-discord-youtube/discussions/17186)
+>
+> **Как включить DoH в Яндекс Браузере.** Меню --> "Настройки" --> "Безопасность" --> "Защита соединения" --> "Использовать безопасный DNS-сервер". Можно сразу открыть `browser://protect`. Выберите поставщика из списка и откройте проблемную страницу заново. [Справка Яндекса](https://browser.yandex.ru/help/ru/security/dnscrypt)
+
+> [!IMPORTANT]
+> **Если YouTube тормозит или ролики зависают.** По версии ekungurov, на некоторых сетях сбой может быть в соединении между локальными кэширующими узлами YouTube (GGC) и серверами Google. В таком случае одного zapret для восстановления загрузки видео недостаточно. [Разбор #18725](https://github.com/Flowseal/zapret-discord-youtube/issues/18725#issuecomment-6756750462) · [Комментарий #18271](https://github.com/Flowseal/zapret-discord-youtube/issues/18271#issuecomment-6317692448) · [Схема с ASCII-артом #18725](https://github.com/Flowseal/zapret-discord-youtube/issues/18725#issuecomment-6769042457)
+
+> [!IMPORTANT]
+> Скачивайте готовый архив с официальной страницы релизов. Выбирайте `zapret-discord-youtube-1.10.4.zip` или `.rar` в разделе Assets. Проверяйте, что владелец репозитория - Flowseal. [Последний релиз](https://github.com/Flowseal/zapret-discord-youtube/releases/latest) · [Предупреждение о поддельных сборках](https://github.com/Flowseal/zapret-discord-youtube/issues/1130)
+
 ## Разделы
 
 - [Быстрый старт](#быстрый-старт) - скачать, распаковать и подобрать стратегию.
@@ -11,9 +24,6 @@
 - [Telegram и hosts](docs/TELEGRAM.md) - обновление официального блока для Discord и Telegram Web, прокси для Telegram Desktop.
 - [Антивирус и VirusTotal](docs/VIRUSTOTAL.md) - проверка происхождения архива, SHA-256 и детектов.
 - [Полезные ссылки](docs/LINKS.md) - справка, инструменты и обсуждения с решениями.
-
-> [!IMPORTANT]
-> Скачивайте готовый архив с официальной страницы релизов. Выбирайте `zapret-discord-youtube-1.10.4.zip` или `.rar` в разделе Assets. Проверяйте, что владелец репозитория - Flowseal. [Последний релиз](https://github.com/Flowseal/zapret-discord-youtube/releases/latest) · [Предупреждение о поддельных сборках](https://github.com/Flowseal/zapret-discord-youtube/issues/1130)
 
 ## Быстрый старт
 
