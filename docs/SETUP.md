@@ -89,26 +89,6 @@ ipconfig /flushdns
 
 После сброса TCP/IP или Winsock перезагрузите ПК и повторите проверку. [Сброс TCP/IP в Windows](https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/reset-tcp-ip-net-shell) · [Команды Winsock](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/netsh-winsock) · [README Flowseal](https://github.com/Flowseal/zapret-discord-youtube/blob/1.10.4/README.md)
 
-<details>
-<summary>Отдельная настройка диапазона TCP-портов из исходного гайда</summary>
-
-Если проверяете именно эту настройку, сначала запишите исходные значения `Start Port` и `Number of Ports`. Первая команда показывает текущий диапазон, вторая задаёт диапазон из исходного поста.
-
-```cmd
-netsh int ipv4 show dynamicport tcp
-netsh int ipv4 set dynamicport tcp start=10000 num=30000
-```
-
-Для отката подставьте сохранённые значения в ту же команду `set dynamicport`. Стандартный диапазон Windows начинается с `49152` и содержит `16384` порта. Если до изменения стояли стандартные значения, команда отката выглядит так.
-
-```cmd
-netsh int ipv4 set dynamicport tcp start=49152 num=16384
-```
-
-[Диапазон динамических портов Windows](https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/default-dynamic-port-range-tcpip-chang)
-
-</details>
-
 ## Как выключить и включить zapret
 
 | Режим | Выключить | Включить обратно |
